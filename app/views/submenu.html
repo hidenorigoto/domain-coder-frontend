@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-8">
+        <h4><i class="fa fa-comments-o"></i> コンテキスト</h4>
+    </div>
+    <div class="col-md-4 pull-right">
+        <button class="btn btn-default">追加</button>
+    </div>
+</div>
+<ul ng-repeat="context in contexts" class="nav nav-pills nav-stacked">
+    <li>{{ context.name }}</li>
+</ul>
