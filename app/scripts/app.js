@@ -2,36 +2,43 @@
 
 /**
  * @ngdoc overview
- * @name domainCoderApp
- * @description
- * # domainCoderApp
- *
- * Main module of the application.
+ * @name DomainCoderApp
  */
-angular
-  .module('domainCoderApp', [
+angular.module('DomainCoderApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
-  ])
-  .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+    'ngCollection',
+    'ui.router',
+    'ui.bootstrap',
+    'DomainCoder',
+    'Diagram',
+    'uuid'
+])
+.config(
+    ['$stateProvider', '$locationProvider',
+    function ($stateProvider, $locationProvider) {
+
     $locationProvider.html5Mode(true);
-    $stateProvider
-        .state('index',{
-            url: '/',
-            views: {
-                'submenu': {
-                    templateUrl: 'views/submenu.html',
-                    controller: 'SubmenuCtrl'
-                },
-                'main': {
-                    templateUrl: 'views/main.html',
-                    controller: 'MainCtrl'
-                }
-            }
-        });
-  }]);
+}]);
+
+angular.module('DomainCoderApp').factory('AppContext', function() {
+    var context = {
+        targetContext: null,
+        targetConcept: null,
+
+        selectContext: function(context) {
+            this.targetContext = context;
+            this.targetConcept = null;
+        },
+        selectConcept: function(concept) {
+            this.targetConcept = concept;
+            this.targetContext = null;
+        }
+    };
+
+    return context;
+});

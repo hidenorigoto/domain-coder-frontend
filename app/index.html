@@ -9,6 +9,8 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -17,7 +19,7 @@
     <link rel="stylesheet" href="styles/editor.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="domainCoderApp">
+  <body ng-app="DomainCoderApp" ng-strict-di>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -41,12 +43,13 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="RootCtrl">
         <div class="row">
-            <div ui-view="submenu" id="sidemenu" class="col-sm-3 col-md-3 sidebar">
+            <div ng-controller="SubmenuCtrl" ng-include="'views/submenu.html'" id="submenu" class="col-sm-3 col-md-3 sidebar">
             </div>
-            <div ui-view="main" class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            </div>
+
+            <div ng-controller="MainCtrl" ng-show="AppContext.targetContext != null" ng-include="'views/main-context.html'" ng-show="" id="main" class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"></div>
+            <div ng-controller="MainConceptCtrl" ng-show="AppContext.targetConcept != null" ng-include="'views/main-concept.html'" id="main-concept" class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main"></div>
         </div>
     </div>
 
@@ -81,13 +84,37 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-collection/angular-collection.min.js"></script>
+    <script src="bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="bower_components/angular-uuid/uuid.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    <script src="bower_components/joint/dist/joint.nojquery.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/submenu.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/model/module.js"></script>
+    <script src="scripts/model/context/context.js"></script>
+    <script src="scripts/model/context/context-collection.js"></script>
+    <script src="scripts/model/concept/concept.js"></script>
+    <script src="scripts/model/concept/relation.js"></script>
+    <script src="scripts/model/concept/concept-collection.js"></script>
+    <script src="scripts/diagram/module.js"></script>
+    <script src="scripts/diagram/concept-diagram.js"></script>
+    <script src="scripts/diagram/diagram-collection.js"></script>
+    <script src="scripts/diagram/shape/concept.js"></script>
+    <script src="scripts/diagram/shape/data.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/root.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/main-concept.js"></script>
+    <script src="scripts/controllers/submenu.js"></script>
+    <script src="scripts/controllers/submenu-context.js"></script>
+    <script src="scripts/controllers/submenu-concept.js"></script>
+    <script src="scripts/controllers/conceptual-map/tab.js"></script>
+    <script src="scripts/controllers/flow/tab.js"></script>
+    <script src="scripts/controllers/description/tab.js"></script>
+    <script src="scripts/controllers/term/tab.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

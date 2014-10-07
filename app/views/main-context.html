@@ -1,0 +1,22 @@
+<div ng-show="AppContext.targetContext != null">
+    <h2 class="contextName">コンテキスト：{{AppContext.targetContext.name}}</h2>
+
+    <tabset>
+        <tab select="selectConceptualMapEditor()">
+            <tab-heading><i class="fa fa-share-alt"></i> マップ</a></tab-heading>
+            <div ng-controller="ConceptualMapTabCtrl" ng-include="'views/conceptual-map/tab.html'" onload="onLoad()"></div>
+        </tab>
+        <tab select="selectFlowEditor()">
+            <tab-heading><i class="fa fa-share-alt"></i> フロー</a></tab-heading>
+            <div ng-controller="FlowTabCtrl" ng-include="'views/flow/tab.html'"></div>
+        </tab>
+        <tab select="selectDescriptionEditor()">
+            <tab-heading><i class="fa fa-share-alt"></i> 説明</a></tab-heading>
+            <div ng-controller="DescriptionTabCtrl" ng-include="'views/description/tab.html'"></div>
+        </tab>
+        <tab select="selectTermEditor()">
+            <tab-heading><i class="fa fa-share-alt"></i> 用語</a></tab-heading>
+            <div ng-controller="TermTabCtrl" ng-include="'views/term/tab.html'"></div>
+        </tab>
+    </tabset>
+</div>
